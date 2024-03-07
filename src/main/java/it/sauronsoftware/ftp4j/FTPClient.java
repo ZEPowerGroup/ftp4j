@@ -3958,7 +3958,9 @@ public class FTPClient {
 						try {
 							noop();
 						} catch (Throwable t) {
-							; // ignore...
+							if (t instanceof RuntimeException) throw (RuntimeException) t;
+							if (t instanceof Error) throw (Error) t;
+							throw new RuntimeException(t);
 						}
 					}
 				}
